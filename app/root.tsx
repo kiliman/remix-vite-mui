@@ -5,9 +5,11 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  isRouteErrorResponse,
+  useRouteError,
 } from "@remix-run/react";
 import theme from "./theme";
-import { CssBaseline } from "@mui/material";
+import { Box, CssBaseline, Typography } from "@mui/material";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -32,4 +34,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return <Outlet />;
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+  const message = isRouteErrorResponse(error)
+    ? error.data
+    : (error as Error).message;
+  return (
+    <Box sx={{ m: 4 }}>
+      <Typography variant="h4" component="h1" sx={{ mb: 2 }} color="red">
+        {message ?? "An error occurred"}
+      </Typography>
+    </Box>
+  );
 }

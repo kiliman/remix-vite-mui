@@ -1,7 +1,7 @@
 import { Container, Box, Typography, Link } from "@mui/material";
 import type { MetaFunction } from "@remix-run/node";
 import ProTip from "~/components/ProTip";
-
+import { Link as RemixLink } from "@remix-run/react";
 export const meta: MetaFunction = () => {
   return [
     { title: "New Remix App" },
@@ -17,6 +17,7 @@ export default function Index() {
           Remix + MUI + Vite Example
         </Typography>
         <ProTip />
+        <RemixLink to="/error">Test Error Boundary</RemixLink>
         <Copyright />
       </Box>
     </Container>
